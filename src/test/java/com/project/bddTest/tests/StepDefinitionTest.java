@@ -5,13 +5,18 @@ import com.project.bddTest.pageObjects.MainPageObject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.ByteArrayInputStream;
 
 import static org.junit.Assert.*;
 
@@ -99,6 +104,8 @@ public class StepDefinitionTest extends SpringIntegrationTest {
 
     @Then("^opened notifications dropdown$")
     public void opened_notifications_dropdown() {
+        Allure.addAttachment("NotificationsDropdown", new ByteArrayInputStream(((TakesScreenshot)
+                driver).getScreenshotAs(OutputType.BYTES)));
         assertNotNull(mainPageObject.getNotificationsDropdown());
     }
 }
